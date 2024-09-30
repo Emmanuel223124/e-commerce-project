@@ -2,19 +2,24 @@
 import 'dart:convert';
 import 'dart:math';
 
+import 'package:e_commerce/model/product_model.dart';
 import 'package:http/http.dart' as http;
-class Service {
-  List<dynamic> products=[];
+class ApiService {
+  static const String baseUrl =   "https://fakestoreapi.com/products";
+ 
   
-  Future<void>fetchProducts() async{
-    const url = "https://fakestoreapi.com/products";
-    final response = await http.get(Uri.parse(url));
+  Future<List<ProductModel>> fetchProducts() async{
+   
+    final response = await http.get(Uri.parse(baseUrl));
      if(response.statusCode==200){
-    List<dynamic> products = jsonDecode(response.body);
-    print("products: $products");
+    List<dynamic> jsonData = json.decode(response.body);
+    print("json response is $jsonData");
+    return jsonData.map((data)=> ProductModel.fromJson(data)
+    ).toList();
+    
   
      }else{
-      print("failed to load");
+      throw Exception("failed to load");
      }
   }
 }

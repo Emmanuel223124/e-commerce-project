@@ -6,21 +6,25 @@ class CustomText extends StatelessWidget {
   final double size;
   final Color color;
   final FontWeight fontWeight;
+  final TextOverflow? overflow;
 
   const CustomText(
       {super.key,
       required this.title,
       required this.size,
       required this.color,
-      required this.fontWeight});
+      required this.fontWeight,
+        this.overflow});
 
   @override
   Widget build(BuildContext context) {
     return Text(
       title,
+      overflow: TextOverflow.ellipsis,
       style: GoogleFonts.lato(
         textStyle: Theme.of(context).textTheme.displayLarge,
         fontSize: size,
+       
         fontWeight: fontWeight,
         color: color,
       ),
