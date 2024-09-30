@@ -482,7 +482,7 @@ class _HomePageState extends State<HomePage> {
                                          CustomText(
                                             title: product.title!,
                                             size: 14,
-                                            color: Color(0xFF8D8C8C),
+                                            color:AppColors.primaryBlack ,
                                             
                                             fontWeight: FontWeight.w500),
                                             CustomText(title: product.price!.toString(), size: 14, color: Color(0xFF8D8C8C), fontWeight: FontWeight.w500),
