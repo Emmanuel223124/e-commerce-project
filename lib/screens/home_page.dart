@@ -1,5 +1,6 @@
 import 'package:e_commerce/constant/color.dart';
 import 'package:e_commerce/model/product_model.dart';
+import 'package:e_commerce/model/user_model.dart';
 import 'package:e_commerce/screens/on_sale.dart';
 import 'package:e_commerce/service/service.dart';
 import 'package:e_commerce/widget/custom_text.dart';
@@ -80,6 +81,7 @@ class _HomePageState extends State<HomePage> {
             ),
           ],
         ),
+        
         body: SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.only(top: 24),
@@ -477,7 +479,7 @@ class _HomePageState extends State<HomePage> {
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
-                                        Center(child: Image.network(product.image!,height: 50,width: 50,fit: BoxFit.cover,)),
+                                        // Center(child: Image.network(height: 50,width: 50,fit: BoxFit.cover,)),
                                         const SizedBox(height: 10),
                                          CustomText(
                                             title: product.title!,
@@ -485,7 +487,7 @@ class _HomePageState extends State<HomePage> {
                                             color:AppColors.primaryBlack ,
                                             
                                             fontWeight: FontWeight.w500),
-                                            CustomText(title: product.price!.toString(), size: 14, color: Color(0xFF8D8C8C), fontWeight: FontWeight.w500),
+                                            CustomText(title:toString(), size: 14, color: Color(0xFF8D8C8C), fontWeight: FontWeight.w500),
                                         const SizedBox(height: 5),
                                         const CustomText(
                                             title: "Exp. date: 6/9/2024",
@@ -681,6 +683,7 @@ class _HomePageState extends State<HomePage> {
               ],
             ),
           ),
-        ));
+        )
+        );
   }
 }

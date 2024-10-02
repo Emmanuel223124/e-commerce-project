@@ -1,9 +1,8 @@
+import 'package:e_commerce/model/user_model.dart';
 import 'package:flutter/material.dart';
-import 'dart:convert';
-import 'dart:math';
-
-import 'package:http/http.dart' as http;
+import '../constant/color.dart';
 import '../service/service.dart';
+import '../widget/custom_text.dart';
 
 class TestPage2 extends StatefulWidget {
   const TestPage2({super.key});
@@ -13,49 +12,75 @@ class TestPage2 extends StatefulWidget {
 }
 
 class _TestPageState extends State<TestPage2> {
+  late Future<List<UserModel>> userList;
 
-  List<dynamic> products = [];
-
-  Future<void> fetchProducts() async {
-    const url =" https://fakestoreapi.com/users";
-    final response = await http.get(Uri.parse(url));
-    print(response.body); 
-    print(response.statusCode);
-    
-    if (response.statusCode == 200) {
-      setState(() {
-        products = jsonDecode(response.body);
-      });
-     // print("products: $products");
-    } else {
-     // print("failed to load");
-    }
-  }
+  ApiService serviceClass = ApiService();
 
   @override
   void initState() {
-    fetchProducts();
+    userList = serviceClass.fetchUsers();
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: ListView.builder(
-            itemCount: products.length,
-            itemBuilder: (context, index) {
-              return ListTile(
-                title: Text(
-                  products[index]['title'],
-                ),
-                subtitle: Text(
-                  products[index]['description'],
-                ),
-                leading: Image.network( products[index]['image'],),
-                trailing: Text(
-                  products[index]['price'].toString(),
-                ) ,
-              );
-            }));
+      body: SizedBox(
+        height: MediaQuery.of(context).size.height,
+        child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            child: FutureBuilder<List<UserModel>>(
+                future: userList,
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return const Center(child: CircularProgressIndicator());
+                  } else if (snapshot.hasError) {
+                    return Center(child: Text("Error: ${snapshot.error}"));
+                  } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+                    return const Center(child: Text("No Products Found"));
+                  }
+                  return ListView.builder(
+                      scrollDirection: Axis.vertical,
+                      itemCount: snapshot.data!.length,
+                      itemBuilder: (context, index) {
+                        final user = snapshot.data![index];
+                        return Container(
+                          width: 100,
+                          margin: const EdgeInsets.only(bottom: 20),
+                          padding: const EdgeInsets.all(10),
+                          decoration: BoxDecoration(
+                              color: AppColors.primaryOrange,
+                              borderRadius: BorderRadius.circular(10)),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              // Center(child: Image.network(height: 50,width: 50,fit: BoxFit.cover,)),
+                              const SizedBox(height: 10),
+                              CustomText(
+                                  title: user.title!,
+                                  size: 14,
+                                  color: AppColors.primaryBlack,
+                                  fontWeight: FontWeight.w500),
+
+                              CustomText(
+                                  title: user.body!,
+                                  size: 10,
+                                  color: AppColors.primaryBlack,
+                                  fontWeight: FontWeight.w500),
+
+                              const SizedBox(height: 5),
+
+                               CustomText(
+                                  title: user.userId!.toString(),
+                                  size: 10,
+                                  color: Color(0xFF8D8C8C),
+                                  fontWeight: FontWeight.w400),
+                            ],
+                          ),
+                        );
+                      });
+                })),
+      ),
+    );
   }
 }
