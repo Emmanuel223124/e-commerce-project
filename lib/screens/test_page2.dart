@@ -1,3 +1,4 @@
+import 'package:e_commerce/model/Userid_%20model.dart';
 import 'package:e_commerce/model/user_model.dart';
 import 'package:flutter/material.dart';
 import '../constant/color.dart';
@@ -12,13 +13,13 @@ class TestPage2 extends StatefulWidget {
 }
 
 class _TestPageState extends State<TestPage2> {
-  late Future<List<UserModel>> userList;
+  late Future<List<Userid>> useridList;
 
   ApiService serviceClass = ApiService();
 
   @override
   void initState() {
-    userList = serviceClass.fetchUsers();
+    useridList = serviceClass.fetchUserid();
     super.initState();
   }
 
@@ -29,8 +30,8 @@ class _TestPageState extends State<TestPage2> {
         height: MediaQuery.of(context).size.height,
         child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: FutureBuilder<List<UserModel>>(
-                future: userList,
+            child: FutureBuilder<List<Userid>>(
+                future: useridList,
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.waiting) {
                     return const Center(child: CircularProgressIndicator());
@@ -57,13 +58,13 @@ class _TestPageState extends State<TestPage2> {
                               // Center(child: Image.network(height: 50,width: 50,fit: BoxFit.cover,)),
                               const SizedBox(height: 10),
                               CustomText(
-                                  title: user.title!,
+                                  title: user.name!,
                                   size: 14,
                                   color: AppColors.primaryBlack,
                                   fontWeight: FontWeight.w500),
 
                               CustomText(
-                                  title: user.body!,
+                                  title: user.username!,
                                   size: 10,
                                   color: AppColors.primaryBlack,
                                   fontWeight: FontWeight.w500),
@@ -71,7 +72,27 @@ class _TestPageState extends State<TestPage2> {
                               const SizedBox(height: 5),
 
                                CustomText(
-                                  title: user.userId!.toString(),
+                                  title: user.email!.toString(),
+                                  size: 10,
+                                  color: const Color(0xFF8D8C8C),
+                                  fontWeight: FontWeight.w400),
+                                  CustomText(
+                                  title: user.address!.toString(),
+                                  size: 10,
+                                  color: Color(0xFF8D8C8C),
+                                  fontWeight: FontWeight.w400),
+                                  CustomText(
+                                  title: user.phone!.toString(),
+                                  size: 10,
+                                  color: Color(0xFF8D8C8C),
+                                  fontWeight: FontWeight.w400),
+                                  CustomText(
+                                  title: user.website!.toString(),
+                                  size: 10,
+                                  color: Color(0xFF8D8C8C),
+                                  fontWeight: FontWeight.w400),
+                                   CustomText(
+                                  title: user.company!.toString(),
                                   size: 10,
                                   color: Color(0xFF8D8C8C),
                                   fontWeight: FontWeight.w400),
