@@ -1,6 +1,4 @@
 import 'package:e_commerce/screens/auth/signup_page.dart';
-import 'package:e_commerce/screens/test_page2.dart';
-import 'package:e_commerce/service/service.dart';
 import 'package:e_commerce/widget/custom_button.dart';
 import 'package:e_commerce/widget/custom_text.dart';
 import 'package:flutter/material.dart';
@@ -8,7 +6,6 @@ import 'package:e_commerce/constant/color.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../start_up/bottom_nav.dart';
-import '../test_page.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
