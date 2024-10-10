@@ -19,7 +19,7 @@ class _TestPageState extends State<TestPage2> {
 
   @override
   void initState() {
-    useridList = serviceClass.fetchUserid();
+    useridList = ApiService().fetchUserid();
     super.initState();
   }
 

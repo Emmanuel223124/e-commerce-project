@@ -5,6 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:e_commerce/constant/color.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../../widget/custom_button.dart';
+import '../start_up/bottom_nav.dart';
+
 class SignUpPage extends StatefulWidget {
   const SignUpPage({super.key});
 
@@ -185,32 +188,53 @@ class _SignUpPageState extends State<SignUpPage> {
                 const SizedBox(
                   height: 48,
                 ),
-                InkWell(
-                  onTap: () {
-                    if (apiService.formkey.currentState!.validate()) {
-                      apiService.signup();
-                       Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => const LoginPage(),
-                    ));
-                    apiService.clear();  
-                    }
+                  CustomButton(
+                buttonTitle: 'Create Account',
+                buttonColor: AppColors.primaryOrange,
+                textColor: AppColors.primaryWhite,
+                textWeight: FontWeight.w600,
+                textSize: 16,
+                buttonHeight: 51,
+                alignment: Alignment.center,
+                onTap: () {
+                  
+                 
+                  if (apiService.formkey.currentState!.validate()){
                    
-                  },
-                  child: Container(
-                    height: 51,
-                    width: MediaQuery.of(context).size.width,
-                    decoration: BoxDecoration(
-                      color: AppColors.primaryOrange,
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    alignment: Alignment.center,
-                    child: const CustomText(
-                        title: "Create Account",
-                        size: 16,
-                        color: AppColors.primaryWhite,
-                        fontWeight: FontWeight.w600),
-                  ),
-                ),
+                     apiService.signup();
+                       Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => const LoginPage(),
+                  ));
+                  }
+                 
+                },
+              ),
+                // InkWell(
+                //   onTap: () {
+                //     if (apiService.formkey.currentState!.validate()) {
+                //       apiService.signup();
+                //        Navigator.of(context).push(MaterialPageRoute(
+                //       builder: (context) => const LoginPage(),
+                //     ));
+                //     apiService.clear();  
+                //     }
+                   
+                //   },
+                //   child: Container(
+                //     height: 51,
+                //     width: MediaQuery.of(context).size.width,
+                //     decoration: BoxDecoration(
+                //       color: AppColors.primaryOrange,
+                //       borderRadius: BorderRadius.circular(8),
+                //     ),
+                //     alignment: Alignment.center,
+                //     child: const CustomText(
+                //         title: "Create Account",
+                //         size: 16,
+                //         color: AppColors.primaryWhite,
+                //         fontWeight: FontWeight.w600),
+                //   ),
+                // ),
                 const SizedBox(
                   height: 30,
                 ),
