@@ -63,7 +63,23 @@ class _TestPageState extends State<TestPage> {
                                   title: item.title!,
                                   size: 20,
                                   color: AppColors.primaryBlack,
-                                  fontWeight: FontWeight.w400)
+                                  fontWeight: FontWeight.w400),
+                                   CustomText(
+                                  title: item.price!.toString(),
+                                  size: 20,
+                                  color: AppColors.primaryBlack,
+                                  fontWeight: FontWeight.w400),
+                                   CustomText(
+                                  title: item.description!,
+                                  size: 20,
+                                  color: AppColors.primaryBlack,
+                                  fontWeight: FontWeight.w400),
+                                   CustomText(
+                                  title: item.category!,
+                                  size: 20,
+                                  color: AppColors.primaryBlack,
+                                  fontWeight: FontWeight.w400),
+                                  Center(child: Image.network(item.image!)),
                                      ],
                         
                       ),
